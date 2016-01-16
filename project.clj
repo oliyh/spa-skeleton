@@ -27,6 +27,16 @@
   :source-paths ["src/clj"]
   :resource-paths ["resources"]
   :uberjar-name "spa-skeleton-standalone.jar"
+  :cljsbuild {:builds [{:id "dev"
+                        :source-paths ["src/cljs"]
+                        :figwheel true
+                        :compiler {:output-to "resources/public/cljs/main.js"
+                                   :output-dir "resources/public/cljs/dev"
+                                   :source-map true
+                                   :main "spa-skeleton.app"
+                                   :asset-path "/cljs/dev"
+                                   :optimizations :none
+                                   :pretty-print true}}]}
   :profiles {:uberjar {:aot :all
                        :cljsbuild {:builds
                                    [{:source-paths ["src/cljs"]
@@ -37,11 +47,12 @@
                                                 :asset-path "/cljs/prod"
                                                 :optimizations :advanced}}]}
                        :prep-tasks ["javac" "compile" ["with-profile" "uberjar" "cljsbuild" "once"]]}
-             :dev {:source-paths ["dev"]
+             :dev {:source-paths ["dev" "src/cljs"]
                    :jvm-opts ["-Dnomad.env=dev"]
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
 
                                   ;; cljs
+                                  [figwheel-sidecar "0.5.0-1"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [org.clojure/tools.reader "0.10.0"]
@@ -50,12 +61,4 @@
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-cljsbuild "1.1.2"]
                              [lein-figwheel "0.5.0-2"]]
-                   :cljsbuild {:builds [{:source-paths ["src/cljs"]
-                                         :figwheel true
-                                         :compiler {:output-to "resources/public/cljs/main.js"
-                                                    :output-dir "resources/public/cljs/dev"
-                                                    :source-map true
-                                                    :main "spa-skeleton.app"
-                                                    :asset-path "/cljs/dev"
-                                                    :optimizations :none
-                                                    :pretty-print true}}]}}})
+                   }})
