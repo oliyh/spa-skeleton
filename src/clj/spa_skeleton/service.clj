@@ -50,8 +50,15 @@
              (-> (response (index/index))
                  (content-type "text/html")))))
 
+(def devcards
+  (handler ::devcards-handler
+           (fn [request]
+             (-> (response (index/devcards-page))
+                 (content-type "text/html")))))
+
 (defroutes app-routes
-  [[["/*route" {:get home}]]])
+  [[["/cards.html" {:get devcards}]
+    ["/*route" {:get home}]]])
 
 (def routes
   (concat api-routes app-routes))

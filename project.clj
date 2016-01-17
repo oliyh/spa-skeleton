@@ -21,7 +21,8 @@
                  [org.clojure/clojurescript "1.7.189"]
                  [secretary "1.2.3"]
                  [reagent "0.6.0-alpha"]
-                 [cljs-ajax "0.5.2"]]
+                 [cljs-ajax "0.5.2"]
+                 [devcards "0.2.1"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"
   :source-paths ["src/clj"]
@@ -35,6 +36,16 @@
                                    :source-map true
                                    :main "spa-skeleton.app"
                                    :asset-path "/cljs/dev"
+                                   :optimizations :none
+                                   :pretty-print true}}
+                       {:id "devcards"
+                        :source-paths ["src/cljs"]
+                        :figwheel {:devcards true}
+                        :compiler {:output-to "resources/public/cljs/main_devcards.js"
+                                   :output-dir "resources/public/cljs/devcards"
+                                   :source-map true
+                                   :main "spa-skeleton.start-devcards"
+                                   :asset-path "/cljs/devcards"
                                    :optimizations :none
                                    :pretty-print true}}]}
   :profiles {:uberjar {:aot :all
