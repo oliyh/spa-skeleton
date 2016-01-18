@@ -38,6 +38,13 @@ cljs.user>
 You can make changes to the CLJS source files under `/src/cljs/`, save them, and see the
 results hot-loaded into your browser with no refresh required. You can evaluate code in the CLJS REPL just like you would in a CLJ REPL.
 
+## ClojureScript builds
+
+There are two different builds provided: the default `dev` and; `devcards`. In the ClojureScript REPL you can switch builds using `(switch-to-build "devcards")`. In order to use the devcards build you will need to view [cards.html](http://localhost:8080/cards.html) instead of the index.
+
+Devcards provides a way to test components interactively and in isolation, see more at [Devcards](https://github.com/bhauman/devcards).
+
+
 ## Building and running from uberjar
 ```bash
 $ lein uberjar
