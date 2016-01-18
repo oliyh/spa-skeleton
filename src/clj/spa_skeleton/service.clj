@@ -14,7 +14,8 @@
             [schema.core :as s]
             [spa-skeleton.views.index :as index]
             [clojure.tools.logging :as log]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [io.pedestal.http.sse :as sse]))
 
 (def status-handler
   (sw.doc/annotate
@@ -25,6 +26,12 @@
     (fn [request]
       {:status 200
        :body {:foo "bar"}}))))
+
+(defn- initialise-stream [event-channel context]
+  (a/go-loop []
+    (a/>! event-channel {:data (rand-nth (range 10))})
+    (a/<! (a/timeout 1000))
+    (recur)))
 
 (s/with-fn-validation ;; Optional, but nice to have at compile time
   (swagger/defroutes api-routes
@@ -38,8 +45,8 @@
                               (swagger/coerce-request)
                               (swagger/validate-response)]
 
-       ["/status"
-        {:get status-handler}]
+       ["/status" {:get status-handler}]
+       ["/events" {:get (sse/start-event-stream initialise-stream)}]
 
        ["/swagger.json" {:get [(swagger/swagger-json)]}]
        ["/*resource" {:get [(swagger/swagger-ui)]}]]]]))
