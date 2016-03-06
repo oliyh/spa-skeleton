@@ -18,7 +18,8 @@
   (api/annotate
    {:summary "Service status"
     :description "Describes the state of the service"
-    :parameters {}}
+    :parameters {}
+    :responses {200 {:body {:foo s/Str}}}}
    (handler
     ::status
     (fn [request]
