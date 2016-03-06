@@ -11,7 +11,7 @@ Include the following in your emacs init.el:
    "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))"))
 ```
 
-In the cutting-edge version of CIDER the variable is called `cider-cljs-lein-repl` instead, but the code above works for 0.10.1.
+In the older versions of CIDER the variable is called `cider-cljs-repl` instead.
 
 To start both REPLs simultaneously press `C-c M-J`.
 Figwheel will be started and a piggieback connection into the browser's Javascript VM will be automatically established.
