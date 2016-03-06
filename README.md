@@ -1,6 +1,7 @@
 # spa-skeleton
 
-A skeleton project for a ClojureScript Single Page Application (SPA) backed by a Swagger API
+A skeleton project for a ClojureScript Single Page Application (SPA) backed by a Swagger API.
+The aim is to provide basic wiring from which an application can be rapidly developed.
 
 ## Clojure and ClojureScript, side by side
 
@@ -18,7 +19,7 @@ Figwheel will be started and a piggieback connection into the browser's Javascri
 
 ## Server
 
-The server consists of a Pedestal web server which serves a root for the SPA and a [Swagger API](http://swagger.io/).
+The server consists of a Pedestal web server which serves a root for the SPA and a [Swagger API](http://swagger.io/) provided by [pedestal-api](https://github.com/oliyh/pedestal-api).
 You can start it from a new Clojure REPL by loading the dev namespace and running start:
 ```clojure
 user> (dev)
