@@ -4,24 +4,24 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [pedestal-api "0.1.0"]
-                 [io.pedestal/pedestal.service "0.4.1"]
-                 [io.pedestal/pedestal.jetty "0.4.1"]
+                 [pedestal-api "0.2.0"]
+                 [io.pedestal/pedestal.service "0.5.0"]
+                 [io.pedestal/pedestal.jetty "0.5.0"]
 
-                 [ch.qos.logback/logback-classic "1.1.6" :exclusions [org.slf4j/slf4j-api]]
-                 [org.slf4j/jul-to-slf4j "1.7.18"]
-                 [org.slf4j/jcl-over-slf4j "1.7.18"]
-                 [org.slf4j/log4j-over-slf4j "1.7.18"]
+                 [ch.qos.logback/logback-classic "1.1.7" :exclusions [org.slf4j/slf4j-api]]
+                 [org.slf4j/jul-to-slf4j "1.7.21"]
+                 [org.slf4j/jcl-over-slf4j "1.7.21"]
+                 [org.slf4j/log4j-over-slf4j "1.7.21"]
                  [org.clojure/tools.logging "0.3.1"]
 
                  [jarohen/nomad "0.7.2"]
                  [hiccup "1.0.5"]
 
                  ;;cljs
-                 [org.clojure/clojurescript "1.7.228"]
+                 [org.clojure/clojurescript "1.9.36"]
                  [secretary "1.2.3"]
                  [reagent "0.6.0-alpha"]
-                 [cljs-ajax "0.5.3"]]
+                 [cljs-ajax "0.5.5"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"
   :source-paths ["src/clj"]
@@ -52,7 +52,7 @@
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
 
                                   ;; cljs
-                                  [figwheel-sidecar "0.5.0-6"]
+                                  [figwheel-sidecar "0.5.4"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [org.clojure/tools.reader "0.10.0"]
@@ -60,6 +60,5 @@
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-cljsbuild "1.1.2"]
-                             [lein-figwheel "0.5.0-2"]
-                             [lein-sass "0.1.0"]]
+                             [lein-figwheel "0.5.0-2"]]
                    :sass {:source "resources/sass" :target "resources/public/css"}}})

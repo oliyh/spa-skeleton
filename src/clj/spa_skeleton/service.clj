@@ -2,7 +2,7 @@
   (:require [clojure.core.async :as a]
             [io.pedestal.http :as bootstrap]
             [io.pedestal.http.route.definition :refer [defroutes]]
-            [io.pedestal.impl.interceptor :refer [terminate]]
+            [io.pedestal.interceptor.chain :refer [terminate]]
             [io.pedestal.interceptor.helpers :refer [before handler]]
             [io.pedestal.interceptor :as interceptor]
             [pedestal-api.core :as api]
