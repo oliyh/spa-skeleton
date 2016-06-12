@@ -8,7 +8,7 @@ The aim is to provide basic wiring from which an application can be rapidly deve
 Include the following in your emacs init.el:
 ```
 (custom-set-variables
- '(cider-cljs-repl
+ '(cider-cljs-lein-repl
    "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))"))
 ```
 
