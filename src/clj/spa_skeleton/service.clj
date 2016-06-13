@@ -19,7 +19,8 @@
    {:summary "Service status"
     :description "Describes the state of the service"
     :parameters {}
-    :responses {200 {:body {:foo s/Str}}}}
+    :responses {200 {:body {:foo s/Str}}}
+    :operationId :status}
    (handler
     ::status
     (fn [request]
@@ -31,6 +32,14 @@
     (a/>! event-channel {:data (rand-nth (range 10))})
     (a/<! (a/timeout 1000))
     (recur)))
+
+(def events-handler
+  (api/annotate
+   {:summary "SSE event stream"
+    :description "Broadcasts random numbers"
+    :parameters {}
+    :operationId :events}
+   (sse/start-event-stream initialise-stream)))
 
 (s/with-fn-validation ;; Optional, but nice to have at compile time
   (api/defroutes api-routes
@@ -47,7 +56,7 @@
                               (api/validate-response)]
 
        ["/status" {:get status-handler}]
-       ["/events" {:get (sse/start-event-stream initialise-stream)}]
+       ["/events" {:get events-handler}]
 
        ["/swagger.json" {:get [api/swagger-json]}]
        ["/*resource" {:get [api/swagger-ui]}]]]]))
