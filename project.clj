@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [pedestal-api "0.2.0"]
+                 [pedestal-api "0.3.0-SNAPSHOT"]
                  [io.pedestal/pedestal.service "0.5.0"]
                  [io.pedestal/pedestal.jetty "0.5.0"]
 
@@ -23,6 +23,7 @@
                  [reagent "0.6.0-alpha"]
                  [cljs-http "0.1.41"]
                  [martian "0.1.0-SNAPSHOT"]
+                 [martian-cljs-http "0.1.0-SNAPSHOT"]
                  [org.clojure/core.async "0.2.382"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"

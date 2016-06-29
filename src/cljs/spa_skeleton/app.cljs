@@ -2,7 +2,8 @@
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]]
             [martian.core :as martian]
-            [martian.protocols :refer [url-for]]
+            [martian.protocols :refer [url-for request-for]]
+            [martian.cljs-http :as martian-http]
             [reagent.dom :as r]
             [reagent.core :as reagent])
   (:require-macros [cljs.core.async.macros :refer [go]]))
@@ -32,6 +33,26 @@
      {:href "/api/index.html"}
      "Check out the Swagger API"]]])
 
+(defn- status-demo [martian]
+  (let [status (reagent/atom "Loading...")]
+    (with-meta
+      (fn []
+        [:div.mdl-card.mdl-shadow--2dp {:style {:margin "0 auto" :top "3em"}}
+         [:div.mdl-card__title.mdl-card--expand
+          {:style {:color "white"
+                   :background "url('/images/skeleton-inverted.png') bottom right 0% no-repeat black"
+                   :backgroundSize "80px 80px"
+                   :height "80px"}}
+          [:h2.mdl-card__title-text "HTTP request"]]
+         [:div.mdl-card__supporting-text
+          [:div "Response from "
+           (let [status-url (url-for martian :status)]
+             [:a {:href status-url} status-url])
+           ":"]
+          [:br]
+          [:code (pr-str @status)]]])
+      {:component-will-mount #(go (reset! status (:body (<! (request-for martian :status)))))})))
+
 (defn- sse-demo [martian]
   (let [sse-events (event-source (url-for martian :events))]
     (fn []
@@ -46,15 +67,17 @@
 
 (defn- home [martian]
   [:div.mdl-grid
-   [:div.mdl-cell.mdl-cell--6-col
+   [:div.mdl-cell.mdl-cell--4-col
     [welcome]]
-   [:div.mdl-cell.mdl-cell--6-col
+   [:div.mdl-cell.mdl-cell--4-col
+    [(status-demo martian)]]
+   [:div.mdl-cell.mdl-cell--4-col
     [sse-demo martian]]])
 
 (defn- init []
   (go
     (let [swagger-json (:body (<! (http/get "/api/swagger.json")))
-          martian (martian/bootstrap-swagger "" swagger-json)]
+          martian (martian/bootstrap-swagger "" swagger-json {:interceptors [martian-http/perform-request]})]
       (r/render [home martian] app))))
 
 (.addEventListener js/document "DOMContentLoaded" init)
