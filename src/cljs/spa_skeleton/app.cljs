@@ -2,7 +2,6 @@
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]]
             [martian.core :as martian]
-            [martian.protocols :refer [url-for request-for]]
             [martian.cljs-http :as martian-http]
             [reagent.dom :as r]
             [reagent.core :as reagent])
@@ -46,15 +45,15 @@
           [:h2.mdl-card__title-text "HTTP request"]]
          [:div.mdl-card__supporting-text
           [:div "Response from "
-           (let [status-url (url-for martian :status)]
+           (let [status-url (martian/url-for martian :status)]
              [:a {:href status-url} status-url])
            ":"]
           [:br]
           [:code (pr-str @status)]]])
-      {:component-will-mount #(go (reset! status (:body (<! (request-for martian :status)))))})))
+      {:component-will-mount #(go (reset! status (:body (<! (martian/response-for martian :status)))))})))
 
 (defn- sse-demo [martian]
-  (let [sse-events (event-source (url-for martian :events))]
+  (let [sse-events (event-source (martian/url-for martian :events))]
     (fn []
       [:div.mdl-card.mdl-shadow--2dp {:style {:margin "0 auto" :top "3em"}}
        [:div.mdl-card__title.mdl-card--expand
@@ -77,7 +76,11 @@
 (defn- init []
   (go
     (let [swagger-json (:body (<! (http/get "/api/swagger.json")))
-          martian (martian/bootstrap-swagger "" swagger-json {:interceptors [martian-http/perform-request]})]
+          martian (martian/bootstrap-swagger "" swagger-json
+                                             {:interceptors (concat martian/default-interceptors
+                                                                    [martian-http/encode-body
+                                                                     martian-http/coerce-response
+                                                                     martian-http/perform-request])})]
       (r/render [home martian] app))))
 
 (.addEventListener js/document "DOMContentLoaded" init)
