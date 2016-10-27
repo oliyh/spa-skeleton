@@ -74,13 +74,7 @@
     [sse-demo martian]]])
 
 (defn- init []
-  (go
-    (let [swagger-json (:body (<! (http/get "/api/swagger.json")))
-          martian (martian/bootstrap-swagger "" swagger-json
-                                             {:interceptors (concat martian/default-interceptors
-                                                                    [martian-http/encode-body
-                                                                     martian-http/coerce-response
-                                                                     martian-http/perform-request])})]
-      (r/render [home martian] app))))
+  (go (let [martian (<! (martian-http/bootstrap-swagger "/api/swagger.json"))]
+        (r/render [home martian] app))))
 
 (.addEventListener js/document "DOMContentLoaded" init)

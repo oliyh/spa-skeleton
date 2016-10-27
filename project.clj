@@ -22,8 +22,8 @@
                  [secretary "1.2.3"]
                  [reagent "0.6.0-alpha"]
                  [cljs-http "0.1.41"]
-                 [martian "0.1.0"]
-                 [martian-cljs-http "0.1.0"]
+                 [martian "0.1.1-SNAPSHOT"]
+                 [martian-cljs-http "0.1.1-SNAPSHOT"]
                  [org.clojure/core.async "0.2.382"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"
