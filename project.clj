@@ -4,27 +4,27 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [pedestal-api "0.3.0"]
-                 [io.pedestal/pedestal.service "0.5.1"]
-                 [io.pedestal/pedestal.jetty "0.5.1"]
+                 [pedestal-api "0.3.1"]
+                 [io.pedestal/pedestal.service "0.5.2"]
+                 [io.pedestal/pedestal.jetty "0.5.2"]
 
-                 [ch.qos.logback/logback-classic "1.1.7" :exclusions [org.slf4j/slf4j-api]]
-                 [org.slf4j/jul-to-slf4j "1.7.21"]
-                 [org.slf4j/jcl-over-slf4j "1.7.21"]
-                 [org.slf4j/log4j-over-slf4j "1.7.21"]
+                 [ch.qos.logback/logback-classic "1.1.9" :exclusions [org.slf4j/slf4j-api]]
+                 [org.slf4j/jul-to-slf4j "1.7.22"]
+                 [org.slf4j/jcl-over-slf4j "1.7.22"]
+                 [org.slf4j/log4j-over-slf4j "1.7.22"]
                  [org.clojure/tools.logging "0.3.1"]
 
-                 [jarohen/nomad "0.7.2"]
+                 [jarohen/nomad "0.7.3"]
                  [hiccup "1.0.5"]
 
                  ;;cljs
-                 [org.clojure/clojurescript "1.9.36"]
+                 [org.clojure/clojurescript "1.9.293"]
                  [secretary "1.2.3"]
-                 [reagent "0.6.0-alpha"]
-                 [cljs-http "0.1.41"]
-                 [martian "0.1.1-SNAPSHOT"]
-                 [martian-cljs-http "0.1.1-SNAPSHOT"]
-                 [org.clojure/core.async "0.2.382"]]
+                 [reagent "0.6.0"]
+                 [cljs-http "0.1.42"]
+                 [martian "0.1.3"]
+                 [martian-cljs-http "0.1.3"]
+                 [org.clojure/core.async "0.2.395"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"
   :source-paths ["src/clj"]
@@ -55,7 +55,7 @@
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
 
                                   ;; cljs
-                                  [figwheel-sidecar "0.5.4"]
+                                  [figwheel-sidecar "0.5.8"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [org.clojure/tools.reader "0.10.0"]
