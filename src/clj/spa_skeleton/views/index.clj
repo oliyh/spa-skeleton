@@ -34,5 +34,4 @@
              [:h4 "SPA is loading..."]
              [:p "This is a modern website with modern requirements. If you cannot see anything, try upgrading your browser."]]]]
 
-          (include-js "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"
-                      "/cljs/main.js")]))
+          (include-js "/cljs/main.js")]))

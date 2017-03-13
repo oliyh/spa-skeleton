@@ -77,4 +77,6 @@
    ::bootstrap/routes routes
    ::bootstrap/router :linear-search
    ::bootstrap/resource-path "/public"
-   ::bootstrap/type :jetty})
+   ::bootstrap/type :jetty
+   ::bootstrap/secure-headers {:content-security-policy-settings
+                               {:script-src "'self' 'unsafe-inline' 'unsafe-eval'"}}})
