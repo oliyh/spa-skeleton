@@ -1,23 +1,23 @@
 (ns spa-skeleton.start-devcards
   (:require [cljs.test :refer-macros [testing is]]
             [clojure.string :as str]
-            [devcards.core :as dc :refer-macros [defcard deftest start-devcard-ui!]]))
+            [spa-skeleton.app :as app]
+            [devcards.core :as dc :refer-macros [defcard deftest defcard-rg start-devcard-ui!]]))
 
 (enable-console-print!)
 
-(defcard
-  "### Getting started with Devcards.
+(defcard-rg card-test
+  [:div.mdl-grid
+   [:div.mdl-cell.mdl-cell--6-col
+    [app/card "Hello" "English"]]
 
-Call your components within `defcard` with your initial value.
+   [:div.mdl-cell.mdl-cell--6-col
+    [app/card "Hola" "Spanish"]]
 
-See the [devcards](http://rigsomelight.com/devcards/) site for more examples.")
+   [:div.mdl-cell.mdl-cell--6-col
+    [app/card "Ciao" "Italian"]]
 
-(deftest check-logic
-  "### You can also produce test reports."
-  (testing "arithmetic"
-    (is (even? (* 1 2)))
-    (is (= 9 (* 3 3)))
-    (testing "strings"
-      (is (= "hello" (str/lower-case "HeLlO"))))))
+   [:div.mdl-cell.mdl-cell--6-col
+    [app/card "Bonjour" "French"]]])
 
 (start-devcard-ui!)
