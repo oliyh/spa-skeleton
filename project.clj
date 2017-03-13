@@ -33,7 +33,7 @@
   :uberjar-name "spa-skeleton-standalone.jar"
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src/cljs"]
-                        :figwheel true
+                        :figwheel {:on-jsload "spa-skeleton.app/figwheel-reload"}
                         :compiler {:output-to "resources/public/cljs/main.js"
                                    :output-dir "resources/public/cljs/dev"
                                    :source-map true
