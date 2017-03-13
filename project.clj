@@ -24,7 +24,8 @@
                  [cljs-http "0.1.42"]
                  [martian "0.1.4"]
                  [martian-cljs-http "0.1.4"]
-                 [org.clojure/core.async "0.2.395"]]
+                 [org.clojure/core.async "0.2.395"]
+                 [devcards "0.2.2"]]
   :main ^:skip-aot spa_skeleton.server
   :target-path "target/%s"
   :source-paths ["src/clj"]
@@ -38,6 +39,16 @@
                                    :source-map true
                                    :main "spa-skeleton.app"
                                    :asset-path "/cljs/dev"
+                                   :optimizations :none
+                                   :pretty-print true}}
+                       {:id "devcards"
+                        :source-paths ["src/cljs"]
+                        :figwheel {:devcards true}
+                        :compiler {:output-to "resources/public/cljs/main_devcards.js"
+                                   :output-dir "resources/public/cljs/devcards"
+                                   :source-map true
+                                   :main "spa-skeleton.start-devcards"
+                                   :asset-path "/cljs/devcards"
                                    :optimizations :none
                                    :pretty-print true}}]}
   :profiles {:uberjar {:aot :all
@@ -58,7 +69,7 @@
                                   [figwheel-sidecar "0.5.8"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
-                                  [org.clojure/tools.reader "0.10.0"]
+                                  [org.clojure/tools.reader "1.0.0-beta4"]
                                   [org.clojure/tools.trace "0.7.9"]]
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
